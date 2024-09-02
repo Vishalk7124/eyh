@@ -1,0 +1,29 @@
+{% extends "base/base.html" %}
+{% block content %}
+
+
+    <section class="section-conten padding-y" style="min-height:84vh">
+
+        <!-- ============================ COMPONENT DELETE POST   ================================= -->
+            <div class="card mx-auto" style="max-width: 768px; margin-top:100px;">
+              <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Delete Post</legend>
+                        <h2>Are you sure you want to delete the post "{{ object.title}}"</h2>
+                    </fieldset>
+                    <div class="form-group">
+                        <button class="btn btn-outline-danger" type="submit">Yes, Delete</button> 
+                        <a class="btn btn-outline-sec" href="{% url 'post-detail' object.id %}">Cancel</a> 
+                    </div>
+                </form>
+
+              </div> <!-- card-body.// -->
+            </div> <!-- card .// -->
+
+        <!-- ============================ COMPONENT DELETE POST    END.// ================================= -->
+        
+        
+    </section>
+{% endblock content %}

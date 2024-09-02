@@ -1,0 +1,33 @@
+{% extends "base/base.html" %}
+{% load crispy_forms_tags %} <!-- Updated here to load crispy forms -->
+{% block content %}
+    <section class="section-conten padding-y" style="min-height:84vh">
+
+        <!-- ============================ COMPONENT USER RECIPES   ================================= -->
+            <h2 class="container mt-5 pt-5">My recipes</h2>
+            {% for post in posts %}
+                {% if post.author == user %}
+                    <div class="card mx-auto" style="max-width: 768px; margin-top:10px;">
+                        <div class="card-body">
+                            <img class="rounded-circle article-img" src="{{ post.image.url }}">
+                
+                                <div class="media-body">
+                                <div class="article-metadata">
+                                    <a class="mr-2" href="#">{{ post.author.first_name }} {{ post.author.last_name }} [ {{ post.author }} ]</a>
+                                    <small class="text-muted">{{ post.date_posted|date:'dS, F, Y' }}</small>
+                                </div>
+                                <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+                                <p class="article-content">{{ post.content }}</p>
+                                </div>
+                        </div> <!-- card-body.// -->
+                    </div> <!-- card .// -->
+                {% endif %}
+            {% endfor %}
+        
+             <p class="text-center mt-4">Have more recipes in mind? <a href="{% url 'post-create' %}">Add new recipe</a></p>
+             <br><br>
+        <!-- ============================ COMPONENT USER RECIPES  END.// ================================= -->
+        
+        
+    </section>
+{% endblock content %}

@@ -1,0 +1,98 @@
+{% extends "base/base.html" %}
+{% load crispy_forms_tags %} <!-- Updated here to load crispy forms -->
+{% block content %}
+<section class="section-conten padding-y" style="min-height:84vh">
+
+    <!-- ============================ COMPONENT HOME   ================================= -->
+    <div class="container mt-5 pt-5">
+        <h2>Our ideas</h2>
+        <div class="row">
+            {% for post in admin_posts %}
+            <div class="col-md-3">
+                <figure class="card card-product-grid">
+                    <div class="img-wrap"> <img src="{{ post.image.url }}"> </div>
+                    <figcaption class="info-wrap border-top text-center">
+                        <a href="#" class="title">{{ post.title }}</a>
+                    </figcaption>
+                </figure> <!-- card // -->
+            </div> <!-- col.// -->
+            {% endfor %}
+        </div>
+        {% if user.is_authenticated %}
+        <h2>Latest recipes from Users</h2>
+        {% for post in posts %}
+        <article class="media content-section">
+            <img class="rounded-circle article-img" src="{{ post.image.url }}">
+
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a class="mr-2" href="#">{{ post.author.first_name }} {{ post.author.last_name }} [ {{ post.author }} ]</a>
+                    <small class="text-muted">{{ post.date_posted|date:'dS, F, Y' }}</small>
+                </div>
+                <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+                <p class="article-content">{{ post.content }}</p>
+            </div>
+        </article>
+        {% endfor %}
+        {% else %}
+        <h2>Some Quotes about Cooking</h2>
+
+        <div class="card mx-auto">
+            <div class="card-body">
+                <div class="quote-container">
+                    <div class="quote">
+                        “It’s not about passion. Passion is something that we tend to overemphasize, that we certainly
+                        place too much importance on. Passion ebbs and flows. To me, it’s about desire. If you have
+                        constant, unwavering desire to be a cook, then you’ll be a great cook.”
+                        <span class="author">— Thomas Keller</span> <br><br>
+
+                    </div>
+                    <div class="quote">
+                        “I cook with wine, sometimes I even add it to the food.”
+                        <span class="author">– WC Fields</span> <br><br>
+                    </div>
+                    <div class="quote">
+                        “If God had intended us to follow recipes, He wouldn’t have given us grandmothers.”
+                        <span class="author">– Linda Henley</span> <br><br>
+                    </div>
+                    <div class="quote">
+                        “The only time to eat diet food is while you’re waiting for the steak to cook.”
+                        <span class="author">– Julia Child</span> <br><br>
+                    </div>
+                    <div class="quote">
+                        “Cooking is like love. It should be entered into with abandon or not at all.”
+                        <span class="author">– Harriet Van Horne</span> <br><br>
+                    </div>
+                    <div class="quote">
+                        “One cannot think well, love well, sleep well if one has not dined well.”
+                        <span class="author">– Virginia Woolf</span> <br><br>
+                    </div>
+                    <div class="quote">
+                        “I feel a recipe is only a theme, which an intelligent cook can play each time with a
+                        variation.”
+                        <span class="author">– Madam Benoit</span> <br><br>
+                    </div>
+                    <div class="quote">
+                        “The way you make an omelet reveals your character.”
+                        <span class="author">– Clifton Fadiman</span> <br><br>
+                    </div>
+                    <div class="quote">
+                        “Great cooking is about being inspired by the simple things around you–fresh markets, various
+                        spices. It doesn’t necessarily have to look fancy.”
+                        <span class="author">– G. Garvin</span> <br>
+                    </div>
+                </div>
+
+        {% endif %}
+
+    </div>
+    <div class="container">
+    </div>
+
+
+    <!-- ============================ COMPONENT HOME  END.// ================================= -->
+
+
+</section>
+
+{% endblock content %}
